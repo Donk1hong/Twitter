@@ -144,6 +144,7 @@
       <path value="$PROJECT_DIR$/app/vendor/laravel-lang/lang" />
       <path value="$PROJECT_DIR$/app/vendor/laravel-lang/native-locale-names" />
       <path value="$PROJECT_DIR$/app/vendor/laravel-lang/native-country-names" />
+      <path value="$PROJECT_DIR$/app/vendor/_laravel_idea" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

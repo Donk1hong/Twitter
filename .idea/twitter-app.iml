@@ -137,6 +137,9 @@
       <excludeFolder url="file://$MODULE_DIR$/app/storage/app" />
       <excludeFolder url="file://$MODULE_DIR$/app/storage/framework" />
       <excludeFolder url="file://$MODULE_DIR$/app/storage/postman" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/_laravel_idea" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
