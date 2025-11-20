@@ -1,0 +1,63 @@
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8000:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./app:/var/www/laravel
+    depends_on:
+      - app
+
+  app:
+    build:
+      context: dockerfiles/Php
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/var/www/laravel
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - ./app/.env
+
+  artisan:
+    build:
+      context: dockerfiles/Php
+    volumes:
+      - ./app:/var/www/laravel
+    entrypoint: ["php", "/var/www/laravel/artisan"]
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8.0
+    ports:
+      - "3316:3306"
+    env_file:
+      - env/mysql.env
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-proot"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    command: [
+      "--default-authentication-plugin=mysql_native_password",
+      "--character-set-server=utf8mb4",
+      "--collation-server=utf8mb4_unicode_ci"
+    ]
+
+  composer:
+    build:
+      context: dockerfiles/Composer
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/var/www/laravel
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
